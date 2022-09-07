@@ -13,6 +13,11 @@ pipeline {
    }
 
    stages {
+        stage('Test') {
+            steps {
+                sh 'node --version'
+            }
+        }
       stage('Preparation') {
          steps {
             cleanWs()
