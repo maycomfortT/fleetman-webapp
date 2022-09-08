@@ -11,34 +11,33 @@ pipeline {
    }
 
    stages {
-       stage('Initialize')
-    {
-        def dockerHome = tool 'MyDocker'
-        def mavenHome  = tool 'MyMaven'
-        env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
-    }
-      stage('Checkout') 
-    {
-        checkout scm
-    }
-
-      stage('Built') 
-           {
-            sh 'uname -a'
-            sh 'mvn -B -DskipTests clean package'  
-          }
-
-        stage('Test') 
-        {
-            //sh 'mvn test'
-            sh 'ifconfig' 
+      stage('Docker node test') {
+      agent {
+        docker {
+          // Set both label and image
+          label 'docker'
+          image 'node:7-alpine'
+          args '--name docker-node' // list any args
         }
-
-        stage('Deliver') 
-          {
-                sh 'bash ./jenkins/deliver.sh'
+      }
+      steps {
+        // Steps run in node:7-alpine docker container on docker agent
+        sh 'node --version'
+      }
+    }
+      stage('Docker maven test') {
+      agent {
+        docker {
+          // Set both label and image
+          label 'docker'
+          image 'maven:3-alpine'
         }
-  
+      }
+      steps {
+        // Steps run in maven:3-alpine docker container on docker agent
+        sh 'mvn --version'
+      }
+    }
       stage('Preparation') {
          steps {
             cleanWs()
@@ -53,7 +52,8 @@ pipeline {
 
       stage('Build and Push Image') {
          steps {
-           sh 'docker image build -t ${REPOSITORY_TAG} .'
+             sh 'echo No build required for Webapp.'
+          // sh 'docker image build -t ${REPOSITORY_TAG} .'
          }
       }
 
