@@ -35,7 +35,7 @@ pipeline {
         sh 'mvn --version'
       }
     }
-  }
+  
       stage('Preparation') {
          steps {
             cleanWs()
