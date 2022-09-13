@@ -25,15 +25,13 @@ pipeline {
 
       stage('Build and Push Image') {
          steps {
-             sh 'echo No build required for Webapp.'
-          // sh 'docker image build -t ${REPOSITORY_TAG} .'
+           sh 'docker image build -t ${REPOSITORY_TAG} .'
          }
       }
 
       stage('Deploy to Cluster') {
           steps {
-             sh 'echo No build required for Webapp.'
-           // sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
+            sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
           }
       }
    }
