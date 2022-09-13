@@ -25,8 +25,8 @@ pipeline {
 
       stage('Build and Push Image') {
          steps {
-            sh 'echo No build required for Webapp.'
-          // sh 'docker image build -t ${REPOSITORY_TAG} .'
+           // sh 'echo No build required for Webapp.'
+           sh 'docker image build -t deploy .'
          }
       }
 
