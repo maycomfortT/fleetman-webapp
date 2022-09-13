@@ -1,7 +1,5 @@
 pipeline {
-   agent {
-      label 'docker'
-   }
+   agent any
 
    environment {
      // You must set the following environment variables
@@ -13,33 +11,6 @@ pipeline {
    }
 
    stages {
-      stage('Docker node test') {
-      agent {
-        docker {
-          // Set both label and image
-          label 'docker'
-          image 'node:7-alpine'
-          args '--name docker-node' // list any args
-        }
-      }
-      steps {
-        // Steps run in node:7-alpine docker container on docker agent
-        sh 'node --version'
-      }
-    }
-      stage('Docker maven test') {
-      agent {
-        docker {
-          // Set both label and image
-          label 'docker'
-          image 'maven:3-alpine'
-        }
-      }
-      steps {
-        // Steps run in maven:3-alpine docker container on docker agent
-        sh 'mvn --version'
-      }
-    }
       stage('Preparation') {
          steps {
             cleanWs()
@@ -54,8 +25,8 @@ pipeline {
 
       stage('Build and Push Image') {
          steps {
-             sh 'echo No build required for Webapp.'
-          // sh 'docker image build -t ${REPOSITORY_TAG} .'
+             //sh 'echo No build required for Webapp.'
+           sh 'docker image build -t ${REPOSITORY_TAG} .'
          }
       }
 
