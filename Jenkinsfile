@@ -6,7 +6,7 @@ pipeline {
      // ORGANIZATION_NAME
      // YOUR_DOCKERHUB_USERNAME (it doesn't matter if you don't have one)
      
-     SERVICE_NAME = "webapp"
+     SERVICE_NAME = "fleetman-webapp"
      REPOSITORY_TAG="${YOUR_DOCKERHUB_USERNAME}/${ORGANIZATION_NAME}-${SERVICE_NAME}:${BUILD_ID}"
    }
 
