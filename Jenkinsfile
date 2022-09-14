@@ -32,7 +32,7 @@ pipeline {
       stage('Deploy to Cluster') {
           steps {
              // sh 'echo No build required for Webapp.'
-           sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
+           sh 'kubectl apply -f ${WORKSPACE}/deploy.yaml'
           }
       }
    }
