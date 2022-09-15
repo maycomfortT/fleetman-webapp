@@ -29,11 +29,15 @@ pipeline {
            sh 'docker image build -t ${REPOSITORY_TAG} .'
          }
       }
+
       stage('Deploy to Cluster') {
           steps {
              // sh 'echo No build required for Webapp.'
-          sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
+         // sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
         // sh 'kubectl apply -f ${WORKSPACE}/deploy.yaml'
+          withKubeConfig([credentialsId: 'mayzulyoo', serverUrl: 'https://api.k8s.my-company.com']) {
+            sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
+    }
           }
       }
    }
