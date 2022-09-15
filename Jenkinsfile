@@ -35,7 +35,7 @@ pipeline {
              // sh 'echo No build required for Webapp.'
          // sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
         // sh 'kubectl apply -f ${WORKSPACE}/deploy.yaml'
-          withKubeConfig([credentialsId: 'natsumigal', serverUrl: 'https://api.k8s.my-company.com']) {
+          withKubeConfig([credentialsId: 'GitHub', serverUrl: 'https://api.k8s.my-company.com']) {
             sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
     }
           }
