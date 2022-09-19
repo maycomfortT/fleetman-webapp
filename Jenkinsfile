@@ -30,6 +30,11 @@ pipeline {
          }
       }
       stage('Deploy to Cluster') {
+           withKubeConfig([credentialsId: 'kubernetes-config']) {
+        sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'  
+        sh 'chmod u+x ./kubectl'  
+        sh './kubectl get pods'
+    }
           steps {
              // sh 'echo No build required for Webapp.'
          // sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
