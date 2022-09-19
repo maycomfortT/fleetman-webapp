@@ -9,15 +9,7 @@ pipeline {
      SERVICE_NAME = "fleetman-webapp"
      REPOSITORY_TAG="${YOUR_DOCKERHUB_USERNAME}/${ORGANIZATION_NAME}-${SERVICE_NAME}:${BUILD_ID}"
    }
-node {
-stage('List pods') {
-    withKubeConfig([credentialsId: 'GitHub']) {
-        sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'  
-        sh 'chmod u+x ./kubectl'  
-        sh './kubectl get pods'
-    }
-  }
-}
+
    stages {
       stage('Preparation') {
          steps {
