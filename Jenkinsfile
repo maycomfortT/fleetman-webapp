@@ -27,19 +27,17 @@ pipeline {
          steps {
            // sh 'echo No build required for Webapp.'
            sh 'docker image build -t ${REPOSITORY_TAG} .'
-           sh 'docker image build -t ${WORKSPACE}/deploy.yaml .'
          }
       }
-      //  stage('List Pods') {
-      //      steps {
-      //          withKubeConfig([credentialsId: 'GitHub']) {
-      //              sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'
-      //              sh 'chmod 777 ./kubectl'
-      //              sh './kubectl auth can-i get secret --as upbound-cloud-impersonator'
-      //              sh './kubectl version'
-      //          }
-      //      }
-       //}
+       stage('List Pods') {
+           steps {
+               withKubeConfig([credentialsId: 'GitHub']) {
+                   sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'
+                   sh 'chmod u+x ./kubectl'
+                   sh './kubectl get pods -n dev'
+               }
+           }
+       }
          //  stage('List Pods') {
          //   steps {
          //       withKubeConfig([credentialsId: 'GitHub']) {
