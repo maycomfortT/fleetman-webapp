@@ -11,6 +11,10 @@ LABEL git_commit=$GIT_COMMIT
 COPY config/*.xml $JENKINS_HOME/
 COPY config/*.groovy /usr/share/jenkins/ref/init.groovy.d/
 
+RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+RUN chmod +x ./kubectl
+RUN mv ./kubectl /usr/local/bin
+
 # Once jenkins is running and configured, run the following command to find the list of plugins installed:
 ##  curl -s -k "http://admin:admin@localhost:8080/pluginManager/api/json?depth=1" | jq -r '.plugins[].shortName' | tee plugins.txt
 RUN /usr/local/bin/install-plugins.sh \
