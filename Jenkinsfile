@@ -27,6 +27,7 @@ pipeline {
          steps {
            // sh 'echo No build required for Webapp.'
            sh 'docker image build -t ${REPOSITORY_TAG} .'
+           sh 'docker image build -t ${WORKSPACE}/deploy.yaml .'
          }
       }
       //  stage('List Pods') {
