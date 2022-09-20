@@ -39,15 +39,18 @@ pipeline {
       //          }
       //      }
        //}
-          stage('List Pods') {
-           steps {
-               withKubeConfig([credentialsId: 'GitHub']) {
-                   sh 'curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"'
-                   sh 'chmod a+x ./kubectl'
-                   //sh 'kubectl auth can-i get secret --as upbound-cloud-impersonator'
-                   sh 'kubectl version'
-               }
-           }
+         //  stage('List Pods') {
+         //   steps {
+         //       withKubeConfig([credentialsId: 'GitHub']) {
+         //           sh 'curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"'
+         //           sh 'install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl'
+         //           sh 'chmod +x kubectl'
+         //           sh 'mkdir -p ~/.local/bin'
+         //           sh 'mv ./kubectl ./kubectl /usr/local/bin'
+         //           //sh 'kubectl auth can-i get secret --as upbound-cloud-impersonator'
+         //           sh 'kubectl version'
+         //       }
+         //   }
        }
       stage('Deploy to Cluster') {
          
