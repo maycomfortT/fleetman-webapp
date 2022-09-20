@@ -43,7 +43,7 @@ pipeline {
            steps {
                withKubeConfig([credentialsId: 'GitHub']) {
                    sh 'curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"'
-                   sh 'chmod 777 kubectl'
+                   sh 'chmod a+x ./kubectl'
                    //sh 'kubectl auth can-i get secret --as upbound-cloud-impersonator'
                    sh 'kubectl version'
                }
