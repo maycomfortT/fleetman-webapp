@@ -29,12 +29,23 @@ pipeline {
            sh 'docker image build -t ${REPOSITORY_TAG} .'
          }
       }
-       stage('List Pods') {
+      //  stage('List Pods') {
+      //      steps {
+      //          withKubeConfig([credentialsId: 'GitHub']) {
+      //              sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'
+      //              sh 'chmod 777 ./kubectl'
+      //              sh './kubectl auth can-i get secret --as upbound-cloud-impersonator'
+      //              sh './kubectl version'
+      //          }
+      //      }
+       //}
+          stage('List Pods') {
            steps {
                withKubeConfig([credentialsId: 'GitHub']) {
-                   sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'
-                   sh 'chmod 777 ./kubectl'
-                   sh './kubectl version'
+                   sh 'curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"'
+                   sh 'chmod 777 kubectl'
+                   //sh 'kubectl auth can-i get secret --as upbound-cloud-impersonator'
+                   sh 'kubectl version'
                }
            }
        }
