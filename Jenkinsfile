@@ -36,8 +36,8 @@ pipeline {
                withKubeConfig([credentialsId: 'GitHub', serverUrl: '10.96.0.1:443']) {
                    sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'
                    sh 'chmod u+x ./kubectl'
-                   sh 'chmod 777 kubectl'
-                   sh 'mv ./kubectl /usr/local/bin'
+                  // sh 'chmod 777 kubectl'
+                  // sh 'mv ./kubectl /usr/local/bin'
                    //sh './kubectl get pods -n dev'
                }
            }
