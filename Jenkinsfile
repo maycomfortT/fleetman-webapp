@@ -27,7 +27,7 @@ pipeline {
          steps {
            // sh 'echo No build required for Webapp.'
            sh 'docker image build -t ${REPOSITORY_TAG} .'
-           sh 'docker compose  -f ${WORKSPACE}/test.yaml up' 
+          // sh 'docker compose  -f ${WORKSPACE}/test.yaml up' 
 
          }
       }
