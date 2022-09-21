@@ -27,6 +27,7 @@ pipeline {
          steps {
            // sh 'echo No build required for Webapp.'
            sh 'docker image build -t ${REPOSITORY_TAG} .'
+           sh 'docker compose build -t ${WORKSPACE}/deploy.yaml'
 
          }
       }
@@ -59,6 +60,7 @@ pipeline {
              // sh 'echo No build required for Webapp.'
          // sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
         // sh 'kubectl apply -f ${WORKSPACE}/deploy.yaml'
+        
             sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
           }
       }
