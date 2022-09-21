@@ -27,14 +27,16 @@ pipeline {
          steps {
            // sh 'echo No build required for Webapp.'
            sh 'docker image build -t ${REPOSITORY_TAG} .'
+
          }
       }
       stage('List Pods') {
            steps {
-               withKubeConfig([credentialsId: 'GitHub']) {
+               withKubeConfig([credentialsId: 'GitHub', serverUrl: 'https://api.k8s.my-company.com']) {
                    sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'
                    sh 'chmod u+x ./kubectl'
-                   sh './kubectl get pods -n dev'
+                   
+                   //sh './kubectl get pods -n dev'
                }
            }
       }
