@@ -37,7 +37,7 @@ pipeline {
             //     }
 sh 'docker logout'
 sh 'docker login -u=aubriellepie -p=Mario219!!!'
-sh 'docker tag ${tag}'
+sh 'docker tag ${tag} ${REPOSITORY_TAG}'
 sh 'docker push ${REPOSITORY_TAG}'
 
          }
