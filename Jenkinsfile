@@ -32,9 +32,12 @@ pipeline {
            // sh 'echo No build required for Webapp.'
            sh 'docker image build -t ${REPOSITORY_TAG} .'
            sh 'echo ${tag}'
-            withCredentials([usernamePassword(credentialsId: 'Docker')]) {
-                    sh "docker push ${REPOSITORY_TAG}:${tag}"
-                }
+            // withCredentials([usernamePassword(credentialsId: 'Docker')]) {
+            //         sh "docker push ${REPOSITORY_TAG}:${tag}"
+            //     }
+
+           sh 'docker login -u=aubriellepie -p=Mario219!!!'
+           sh 'docker push ${REPOSITORY_TAG}/demo:latest ''
 
          }
       }
