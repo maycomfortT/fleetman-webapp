@@ -32,7 +32,8 @@ pipeline {
            // sh 'echo No build required for Webapp.'
            sh 'docker image build -t ${REPOSITORY_TAG} .'
             withCredentials([usernamePassword(credentialsId: 'Docker', usernameVariable: 'aubriellepie', passwordVariable: 'Mario219!!!')]) {
-                    sh "docker login -u ${HUB_USER} -p ${HUB_PASS} && docker push ${REPOSITORY_TAG}:${tag}"
+app.tag(["tag1","latest"])
+                   // sh "docker login -u ${HUB_USER} -p ${HUB_PASS} && docker push ${REPOSITORY_TAG}:${tag}"
                 }
           // sh 'docker compose  -f ${WORKSPACE}/test.yaml up' 
 
