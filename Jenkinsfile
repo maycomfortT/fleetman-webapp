@@ -25,6 +25,9 @@ pipeline {
 
       stage('Build and Push Image') {
          steps {
+            sh 'docker pull my-app:tested'
+            sh 'docker tag my-app:tested my-app:v0.1'
+            sh 'docker push my-app:v0.1'
            // sh 'echo No build required for Webapp.'
            sh 'docker image build -t ${REPOSITORY_TAG} .'
           // sh 'docker compose  -f ${WORKSPACE}/test.yaml up' 
