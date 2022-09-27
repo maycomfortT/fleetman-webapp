@@ -30,17 +30,17 @@ pipeline {
 
          }
       }
-      stage('List Pods') {
-           steps {
-               withKubeConfig([credentialsId: 'config', serverUrl: 'https://127.0.0.1:53859']) {
-                   sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'
-                   sh 'chmod u+x ./kubectl'
-                   sh 'chmod 777 kubectl'
-                   sh 'mv ./kubectl /usr/local/bin'
-                   sh './kubectl get pods -n dev'
-               }
-           }
-      }
+      // stage('List Pods') {
+      //      steps {
+      //          withKubeConfig([credentialsId: 'config', serverUrl: 'https://127.0.0.1:53859']) {
+      //              sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'
+      //              sh 'chmod u+x ./kubectl'
+      //              sh 'chmod 777 kubectl'
+      //              sh 'mv ./kubectl /usr/local/bin'
+      //              sh './kubectl get pods -n dev'
+      //          }
+      //      }
+      // }
          //  stage('List Pods') {
          //   steps {
          //       withKubeConfig([credentialsId: 'GitHub']) {
@@ -54,14 +54,11 @@ pipeline {
          //       }
          //   }
       // }
-      stage('Deploy to Cluster') {
-         
+      stage('Deploy to Cluster') {        
           steps {
-             // sh 'echo No build required for Webapp.'
-         // sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
-        // sh 'kubectl apply -f ${WORKSPACE}/deploy.yaml'
-        
-            sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
+            withKubeConfig([credentialsId: '9e72e27c-4c21-48eb-bced-4435c9c366c4']) {
+                   sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
+               }         
           }
       }
    }
