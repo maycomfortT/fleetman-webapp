@@ -37,7 +37,7 @@ pipeline {
             //     }
 
 sh 'docker login -u=aubriellepie -p=Mario219!!!'
-sh 'docker push ${REPOSITORY_TAG}/demo:latest '
+sh 'docker push ${REPOSITORY_TAG}:${tag} '
 
          }
       }
