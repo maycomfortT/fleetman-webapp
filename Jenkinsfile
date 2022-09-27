@@ -7,7 +7,10 @@ pipeline {
      
      SERVICE_NAME = "fleetman-webapp"
      REPOSITORY_TAG="${YOUR_DOCKERHUB_USERNAME}/${ORGANIZATION_NAME}-${SERVICE_NAME}:${BUILD_ID}"
-      tag = sh(returnStdout: true, script: "git rev-parse --short=10 HEAD").trim()
+      //tag = sh(returnStdout: true, script: "git rev-parse --short=10 HEAD").trim()
+      gitParameter name: 'TAG',
+                   type: 'PT_TAG',
+                   defaultValue: 'master'
    }
 
    stages {
