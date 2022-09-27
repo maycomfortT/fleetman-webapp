@@ -35,7 +35,7 @@ pipeline {
             // withCredentials([usernamePassword(credentialsId: 'Docker')]) {
             //         sh "docker push ${REPOSITORY_TAG}:${tag}"
             //     }
-
+sh 'docker logout'
 sh 'docker login -u=aubriellepie -p=Mario219!!!'
 sh 'docker push ${REPOSITORY_TAG}'
 
