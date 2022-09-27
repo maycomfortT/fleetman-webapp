@@ -36,35 +36,11 @@ pipeline {
             //         sh "docker push ${REPOSITORY_TAG}:${tag}"
             //     }
 
-           sh 'docker login -u=aubriellepie -p=Mario219!!!'
-           sh 'docker push ${REPOSITORY_TAG}/demo:latest ''
+sh 'docker login -u=aubriellepie -p=Mario219!!!'
+sh 'docker push ${REPOSITORY_TAG}/demo:latest '
 
          }
       }
-      // stage('List Pods') {
-      //      steps {
-      //          withKubeConfig([credentialsId: 'config', serverUrl: 'https://127.0.0.1:53859']) {
-      //              sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'
-      //              sh 'chmod u+x ./kubectl'
-      //              sh 'chmod 777 kubectl'
-      //              sh 'mv ./kubectl /usr/local/bin'
-      //              sh './kubectl get pods -n dev'
-      //          }
-      //      }
-      // }
-         //  stage('List Pods') {
-         //   steps {
-         //       withKubeConfig([credentialsId: 'GitHub']) {
-         //           sh 'curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"'
-         //           sh 'install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl'
-         //           sh 'chmod +x kubectl'
-         //           sh 'mkdir -p ~/.local/bin'
-         //           sh 'mv ./kubectl ./kubectl /usr/local/bin'
-         //           //sh 'kubectl auth can-i get secret --as upbound-cloud-impersonator'
-         //           sh 'kubectl version'
-         //       }
-         //   }
-      // }
       stage('Deploy to Cluster') {        
           steps {
             withKubeConfig([credentialsId: '9e72e27c-4c21-48eb-bced-4435c9c366c4']) {
