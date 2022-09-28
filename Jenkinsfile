@@ -6,8 +6,8 @@ pipeline {
      // YOUR_DOCKERHUB_USERNAME (it doesn't matter if you don't have one)
      
      SERVICE_NAME = "fleetman-webapp"
-     REPOSITORY_TAG="${YOUR_DOCKERHUB_USERNAME}/${ORGANIZATION_NAME}-${SERVICE_NAME}:${BUILD_ID}"
-     tag = sh(returnStdout: true, script: "git rev-parse --short=10 HEAD").trim()
+     REPOSITORY_TAG="${ORGANIZATION_NAME}-${SERVICE_NAME}:${BUILD_ID}"
+   //  tag = sh(returnStdout: true, script: "git rev-parse --short=10 HEAD").trim()
      dockerhub=credentials('Docker')
    }
 
@@ -32,7 +32,7 @@ pipeline {
 
       stage('Push and Tag Image to DockerHub') {
          steps {
-   
+sh 'docker logout'
 sh 'echo $dockerhub_PSW | docker login -u $dockerhub_USR --password-stdin'
 sh 'docker tag jenkins/jenkins:lts-jdk11 $dockerhub_USR/${REPOSITORY_TAG}'
 sh 'docker push $dockerhub_USR/${REPOSITORY_TAG}'
