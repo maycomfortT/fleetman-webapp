@@ -32,7 +32,7 @@ pipeline {
          }
       }
 
-      stage('Build Image') {
+      stage('Push and Tag Image to DockerHub') {
          steps {
             // sh 'docker login -u aubriellepie -p Mario219!!! '
             // sh 'docker pull devapp:tested'
