@@ -27,22 +27,15 @@ pipeline {
       stage('Build Image') {
          steps {
            sh 'docker image build -t ${REPOSITORY_TAG} .'
-           sh 'echo ${tag}'
-
          }
       }
 
       stage('Push and Tag Image to DockerHub') {
          steps {
-            // sh 'docker login -u aubriellepie -p Mario219!!! '
-            // sh 'docker pull devapp:tested'
-            // sh 'docker tag devapp:tested my-app:v0.1'
-            // sh 'docker push devapp:v0.1'
-           // sh 'echo No build required for Webapp.'
    
 sh 'echo $dockerhub_PSW | docker login -u $dockerhub_USR --password-stdin'
 sh 'docker tag jenkins/jenkins:lts-jdk11 $dockerhub_USR/${REPOSITORY_TAG}'
-sh 'docker push jenkins/jenkins:lts-jdk11:$dockerhub_USR/${REPOSITORY_TAG}'
+sh 'docker push $dockerhub_USR/${REPOSITORY_TAG}'
 
          }
       }
