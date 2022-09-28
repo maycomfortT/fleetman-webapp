@@ -41,8 +41,8 @@ pipeline {
            // sh 'echo No build required for Webapp.'
    
 sh 'echo $dockerhub_PSW | docker login -u $dockerhub_USR --password-stdin'
-sh 'docker tag aubriellepie/test-webapp ${REPOSITORY_TAG}'
-sh 'docker push aubriellepie/test-webapp:${REPOSITORY_TAG}'
+sh 'docker tag jenkins/jenkins:lts-jdk11 $dockerhub_USR/${REPOSITORY_TAG}'
+sh 'docker push jenkins/jenkins:lts-jdk11:$dockerhub_USR/${REPOSITORY_TAG}'
 
          }
       }
