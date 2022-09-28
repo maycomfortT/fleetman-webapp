@@ -41,7 +41,7 @@ pipeline {
            // sh 'echo No build required for Webapp.'
    
 sh 'echo $dockerhub_PSW | docker login -u $dockerhub_USR --password-stdin'
-sh 'docker tag aubriellepie/webapp:${REPOSITORY_TAG}'
+sh 'docker tag aubriellepie/webapp ${REPOSITORY_TAG}'
 sh 'docker push aubriellepie/webapp:${REPOSITORY_TAG}'
 
          }
