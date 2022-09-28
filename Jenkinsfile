@@ -39,16 +39,10 @@ pipeline {
             // sh 'docker tag devapp:tested my-app:v0.1'
             // sh 'docker push devapp:v0.1'
            // sh 'echo No build required for Webapp.'
-            withCredentials([credentialsId: 'Docker']) {
-                // sh 'docker logout'
-//sh 'docker login -u=$dockerhub_USR -p=stdin'
+   
+sh 'echo $dockerhub_PSW | docker login -u $dockerhub_USR --password-stdin'
 sh 'docker tag ${tag} ${REPOSITORY_TAG}'
 sh 'docker push ${REPOSITORY_TAG}'
-                }
-// sh 'docker logout'
-// sh 'docker login -u=$dockerhub_USR -p=stdin'
-// sh 'docker tag ${tag} ${REPOSITORY_TAG}'
-// sh 'docker push ${REPOSITORY_TAG}'
 
          }
       }
