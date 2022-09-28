@@ -7,7 +7,8 @@ pipeline {
      
      SERVICE_NAME = "fleetman-webapp"
      REPOSITORY_TAG="${YOUR_DOCKERHUB_USERNAME}/${ORGANIZATION_NAME}-${SERVICE_NAME}:${BUILD_ID}"
-       tag = sh(returnStdout: true, script: "git rev-parse --short=10 HEAD").trim()
+     tag = sh(returnStdout: true, script: "git rev-parse --short=10 HEAD").trim()
+     dockerhub=credentials('Docker')
    }
 
    stages {
@@ -23,22 +24,28 @@ pipeline {
          }
       }
 
-      stage('Build and Push Image') {
+      stage('Build Image') {
+         steps {
+           sh 'docker image build -t ${REPOSITORY_TAG} .'
+           sh 'echo ${tag}'
+
+         }
+      }
+
+      stage('Build Image') {
          steps {
             // sh 'docker login -u aubriellepie -p Mario219!!! '
             // sh 'docker pull devapp:tested'
             // sh 'docker tag devapp:tested my-app:v0.1'
             // sh 'docker push devapp:v0.1'
            // sh 'echo No build required for Webapp.'
-           sh 'docker image build -t ${REPOSITORY_TAG} .'
-           sh 'echo ${tag}'
             // withCredentials([usernamePassword(credentialsId: 'Docker')]) {
             //         sh "docker push ${REPOSITORY_TAG}:${tag}"
             //     }
 sh 'docker logout'
-sh 'docker login -u=aubriellepie -p=Mario219!!!'
-//sh 'docker push ${REPOSITORY_TAG}'
+sh 'docker login -u=$dockerhub_USR -p=stdin'
 sh 'docker tag ${tag} ${REPOSITORY_TAG}'
+sh 'docker push ${REPOSITORY_TAG}'
 
          }
       }
